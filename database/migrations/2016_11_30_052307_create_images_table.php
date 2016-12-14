@@ -1,4 +1,4 @@
-<?php
+00<?php
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
@@ -14,12 +14,11 @@ class CreateImagesTable extends Migration
     public function up()
     {
         Schema::create('images', function (Blueprint $table) {
-            $table->increments('id');
             $table->integer('element_id')->unsigned();
             $table->string('name');
             $table->binary('photo');
+            $table->string('url');
             $table->timestamps();
-            $table->rememberToken();
             $table->foreign('element_id')
                   ->references('id')->on('elements')
                   ->onDelete('cascade');

@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Website extends Model
 {
     function user(){
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User', 'id', 'user_id');
     }
 
     function page(){
-        return $this->hasMany('App\Page');
+        return $this->hasMany('App\Page', 'website_id', 'id');
     }
+
+    protected $guarded = ['id', 'name'];
 }

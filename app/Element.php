@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Element extends Model
 {
     function page(){
-        return $this->belongsTo('App\Page');
+        return $this->belongsTo('App\Page', 'page_id');
     }
 
     function text(){
@@ -17,4 +17,6 @@ class Element extends Model
     function image(){
         return $this->hasMany('App\Image');
     }
+
+    protected $guarded = ['id', 'title'];
 }

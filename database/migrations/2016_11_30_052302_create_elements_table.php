@@ -16,9 +16,8 @@ class CreateElementsTable extends Migration
         Schema::create('elements', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('page_id')->unsigned();
-            $table->string('name');
+            $table->string('title');
             $table->timestamps();
-            $table->rememberToken();
             $table->foreign('page_id')
                   ->references('id')->on('pages')
                   ->onDelete('cascade');

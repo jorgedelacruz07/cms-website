@@ -17,8 +17,9 @@ class CreatePagesTable extends Migration
             $table->increments('id');
             $table->integer('website_id')->unsigned();
             $table->string('name');
+            $table->string('url');
+            $table->string('json');
             $table->timestamps();
-            $table->rememberToken();
             $table->foreign('website_id')
                   ->references('id')->on('websites')
                   ->onDelete('cascade');

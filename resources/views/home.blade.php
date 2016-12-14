@@ -14,20 +14,34 @@
     </div>
 </div>
 
-<div class="uk-grid">
-  <div class="uk-width-1-1">
-    {{ Auth::user()->name }}
+<!--  -->
+<div class="uk-container uk-container-center">
+  <div class="uk-grid">
+    <div class="uk-width-1-1">
+      {{ Auth::user()->name }}
+    </div>
+  </div>
+  <div class="uk-grid">
+    <div class="uk-width-1-3">
+      Perfil
+    </div>
+    <div class="uk-width-1-3">
+      Profile
+    </div>
+    <div class="uk-width-1-3">
+      User
+    </div>
   </div>
 </div>
-<div class="uk-grid">
-  <div class="uk-width-1-3">
-    Perfil
-  </div>
-  <div class="uk-width-1-3">
-    Profile
-  </div>
-  <div class="uk-width-1-3">
-    User
+
+<br>
+<br>
+<br>
+<br>
+
+<div class="uk-container">
+  <div class="uk-grid">
+    <a href="/website">Ir a website</a>
   </div>
 </div>
 @endsection
