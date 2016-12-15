@@ -19,16 +19,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-
-// Image
-Route::get('/image', 'ImagesController@index');
-Route::get('/image/create', 'ImagesController@new');
-Route::post('/image/create', 'ImagesController@create');
-Route::get('/image/{id}', ['uses' => 'ImagesController@show']);
-Route::get('/image/edit/{id}', ['uses' => 'ImagesController@edit']);
-Route::post('/image/edit/{id}', ['uses' => 'ImagesController@update']);
-Route::get('/image/delete/{id}', ['uses' => 'ImagesController@delete']);
-
 // Website
 Route::get('/website', 'WebsitesController@index')->middleware('auth');
 Route::get('/website/create', 'WebsitesController@create');

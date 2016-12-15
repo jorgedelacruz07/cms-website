@@ -11,9 +11,7 @@ use App\Image;
 class ImagesController extends Controller
 {
   public function index($websiteID, $pageID){
-    $images = Image::all();
-    return view('images.index')
-      ->with('images',$images);
+    ;
   }
 
   public function create($websiteID, $pageID){
@@ -25,9 +23,20 @@ class ImagesController extends Controller
   }
 
   public function store(Request $request, $websiteID, $pageID){
-    $images = Image::all();
-    return view('images.index')
-      ->with('images',$images);
+    $element = new Element;
+    $image = new Image;
+    $element->page_id = $pageID;
+    $element->title = $request->title;
+    $result1 = $element->save();
+    $image->element_id = $element->id;
+    $image->name = $request->name;
+    $image->photo = $request->photo;
+    $image->url = $request->url;
+    $result2 = $image->save();
+    if($result1 && $result2){
+      return view('elements.index')
+        ->with('image', $image);
+    }
   }
 
   public function show($id){
