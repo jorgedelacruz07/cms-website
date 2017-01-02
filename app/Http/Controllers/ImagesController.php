@@ -8,6 +8,9 @@ use App\Page;
 use App\Element;
 use App\Image;
 
+use App\Http\Requests;
+use Input;
+
 class ImagesController extends Controller
 {
   public function index($websiteID, $pageID){
@@ -27,15 +30,40 @@ class ImagesController extends Controller
     $image = new Image;
     $element->page_id = $pageID;
     $element->title = $request->title;
+    $element->type = $request->type;
     $result1 = $element->save();
     $image->element_id = $element->id;
     $image->name = $request->name;
-    $image->photo = $request->photo;
-    $image->url = $request->url;
+
+    // $image_name = $request->file('url')->getClientOriginalName();
+		// $image_extension = $request->file('url')->getClientOriginalExtension();
+		// $image_new_name = md5(microtime(true));
+		// $temp_file = base_path().'/public/images/upload/'.strtolower($image_new_name.'_temp.'.$image_extension);
+		// $request->file('url')
+    //   ->move(base_path().'/public/images/upload/', strtolower($image_new_name.'_temp.'.$image_extension));
+    // $image->url = $image_name;
+
+    // $destinationPath = '';
+    // $filename = '';
+    // if(Input::hasFile('url')){
+    //   $file = Input::file('url');
+    //   $destinationPath = public_path().'/images/';
+    //   $filename = time().'_'.$file->getClientOriginalName();
+    //   $filename = str_replace('','_'.$filename);
+    //   $uploadSuccess = $file->move($destinationPath,$filename);
+    // }
+    // $image->url = $filename;
+
+    $image->url = "";
     $result2 = $image->save();
     if($result1 && $result2){
-      return view('elements.index')
-        ->with('image', $image);
+      $website = Website::find($websiteID);
+      $page = Page::find($pageID);
+      $elements = Element::all()->where('page_id',$pageID);
+      return view('pages.show')
+        ->with('website',$website)
+        ->with('page',$page)
+        ->with('elements',$elements);
     }
   }
 

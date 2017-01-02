@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Website;
 use App\Page;
+use App\Element;
+use App\Text;
+use App\Image;
 
 class PagesController extends Controller
 {
@@ -44,9 +47,11 @@ class PagesController extends Controller
   public function show($websiteID, $pageID){
     $website = Website::find($websiteID);
     $page = Page::find($pageID);
+    $elements = Element::all()->where('page_id',$pageID);
     return view('pages.show')
       ->with('website', $website)
-      ->with('page', $page);
+      ->with('page', $page)
+      ->with('elements', $elements);
   }
 
   public function edit($websiteID){

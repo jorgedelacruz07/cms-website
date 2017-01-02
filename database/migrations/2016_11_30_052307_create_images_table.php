@@ -1,4 +1,4 @@
-00<?php
+<?php
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
@@ -16,7 +16,6 @@ class CreateImagesTable extends Migration
         Schema::create('images', function (Blueprint $table) {
             $table->integer('element_id')->unsigned();
             $table->string('name');
-            $table->binary('photo');
             $table->string('url');
             $table->timestamps();
             $table->foreign('element_id')

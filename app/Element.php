@@ -11,12 +11,13 @@ class Element extends Model
     }
 
     function text(){
-        return $this->hasMany('App\Text');
+        return $this->hasOne('App\Text', 'element_id', 'element_id');
     }
 
     function image(){
-        return $this->hasMany('App\Image');
+        return $this->hasOne('App\Image', 'element_id', 'element_id');
     }
 
-    protected $guarded = ['id', 'title'];
+    protected $fillable = ['id', 'page_id', 'title', 'type'];
+
 }

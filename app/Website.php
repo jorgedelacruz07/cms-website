@@ -14,5 +14,5 @@ class Website extends Model
         return $this->hasMany('App\Page', 'website_id', 'id');
     }
 
-    protected $guarded = ['id', 'name'];
+    protected $fillable = ['id', 'user_id', 'name', 'url'];
 }

@@ -10,6 +10,7 @@
       <div class="uk-form-row">
         <input name="name" type="text" class="uk-width-1-1 uk-form-large" placeholder="Nombre del elemento" required="">
       </div>
+      <input type="hidden" name="type" value="text">
       <div class="uk-form-row">
         <input name="title" type="text" class="uk-width-1-1 uk-form-large" placeholder="Título" required="">
       </div>

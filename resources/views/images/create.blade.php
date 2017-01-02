@@ -10,14 +10,12 @@
       <div class="uk-form-row">
         <input name="title" type="text" class="uk-width-1-1 uk-form-large" placeholder="Título del elemento" required="">
       </div>
+      <input type="hidden" name="type" value="image">
       <div class="uk-form-row">
         <input name="name" type="text" class="uk-width-1-1 uk-form-large" placeholder="Nombre" required="">
       </div>
       <div class="uk-form-row">
-        <input name="url" type="url" class="uk-width-1-1 uk-form-large" placeholder="URL" required="">
-      </div>
-      <div class="uk-form-row">
-        <input name="photo" type="file" class="uk-width-1-1 uk-form-large" required="">
+        <input name="url" type="file" class="uk-width-1-1 uk-form-large" required="">
       </div>
       <div class="uk-form-row uk-text-center">
         <button class="uk-button uk-button-large">ENVIAR</button>

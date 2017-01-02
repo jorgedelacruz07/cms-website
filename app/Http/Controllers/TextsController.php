@@ -27,13 +27,20 @@ class TextsController extends Controller
     $text = new Text;
     $element->page_id = $pageID;
     $element->title = $request->name;
+    $element->type = $request->type;
     $result1 = $element->save();
     $text->element_id = $element->id;
     $text->title = $request->title;
     $text->content = $request->content;
     $result2 = $text->save();
     if($result1 && $result2){
-      return view('elements.index');
+      $website = Website::find($websiteID);
+      $page = Page::find($pageID);
+      $elements = Element::all()->where('page_id',$pageID);
+      return view('pages.show')
+        ->with('website',$website)
+        ->with('page',$page)
+        ->with('elements',$elements);
     }
   }
 

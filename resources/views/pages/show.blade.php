@@ -12,4 +12,6 @@
 <br><br>
 <a href="/website/<?= $website->id ?>/page/<?= $page->id ?>/element/image/create">CREAR IMAGEN</a>
 
+
+
 @stop

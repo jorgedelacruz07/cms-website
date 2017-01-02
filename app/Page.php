@@ -14,5 +14,5 @@ class Page extends Model
         return $this->hasMany('App\Element', 'page_id', 'id');
     }
 
-    protected $guarded = ['id', 'name'];
+    protected $fillable = ['id', 'website_id', 'name', 'url', 'json'];
 }

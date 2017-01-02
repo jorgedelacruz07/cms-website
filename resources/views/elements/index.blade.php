@@ -1,6 +1,17 @@
+<?php foreach ($elements as $element): ?>
+  <h2><?= $element->title ?></h2>
+  <h4><?= $element->type ?></h4>
+  <?php if (strcmp($element->type,"text") == 0): ?>
+    
+  <?php else: ?>
+    
+  <?php endif; ?>
+  <br><br><br>
+<?php endforeach; ?>
 
-<h4>Elemento 1</h4>
-<h4>Elemento 2</h4>
-<h4>Elemento 3</h4>
-
-<?= $image->photo ?>
+<?php
+  // foreach ($elements as $element) {
+  //   $element->title;
+  //   $element->content;
+  // }
+ ?>
