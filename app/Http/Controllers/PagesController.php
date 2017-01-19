@@ -13,17 +13,7 @@ use App\Image;
 class PagesController extends Controller
 {
   public function index($websiteID){
-    $pages = Page::all()->where('website_id',$websiteID);
-    $website = Website::find($websiteID);
-    return view('websites.show')
-      ->with('pages',$pages)
-      ->with('website',$website);
-  }
-
-  public function create($websiteID){
-    $website = Website::find($websiteID);
-    return view('pages.create')
-      ->with('website',$website);
+    ;
   }
 
   public function store(Request $request, $websiteID){
@@ -36,22 +26,14 @@ class PagesController extends Controller
     if($result){
       $website = Website::find($websiteID);
       $pages = Page::all()->where('website_id',$websiteID);
-      return view('websites.show')
-        ->with('pages',$pages)
-        ->with('website',$website);
-    }else {
-
+      return redirect()->action('WebsitesController@show',
+        ['website' => $website, 'pages' => $pages]
+      );
     }
   }
 
   public function show($websiteID, $pageID){
-    $website = Website::find($websiteID);
-    $page = Page::find($pageID);
-    $elements = Element::all()->where('page_id',$pageID);
-    return view('pages.show')
-      ->with('website', $website)
-      ->with('page', $page)
-      ->with('elements', $elements);
+    ;
   }
 
   public function edit($websiteID){

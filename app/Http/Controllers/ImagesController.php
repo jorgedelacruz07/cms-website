@@ -7,9 +7,8 @@ use App\Website;
 use App\Page;
 use App\Element;
 use App\Image;
-
-use App\Http\Requests;
-use Input;
+use Storage;
+use File;
 
 class ImagesController extends Controller
 {
@@ -27,62 +26,60 @@ class ImagesController extends Controller
 
   public function store(Request $request, $websiteID, $pageID){
     $element = new Element;
-    $image = new Image;
     $element->page_id = $pageID;
     $element->title = $request->title;
     $element->type = $request->type;
     $result1 = $element->save();
+    $image = new Image;
     $image->element_id = $element->id;
     $image->name = $request->name;
-
-    // $image_name = $request->file('url')->getClientOriginalName();
-		// $image_extension = $request->file('url')->getClientOriginalExtension();
-		// $image_new_name = md5(microtime(true));
-		// $temp_file = base_path().'/public/images/upload/'.strtolower($image_new_name.'_temp.'.$image_extension);
-		// $request->file('url')
-    //   ->move(base_path().'/public/images/upload/', strtolower($image_new_name.'_temp.'.$image_extension));
-    // $image->url = $image_name;
-
-    // $destinationPath = '';
-    // $filename = '';
-    // if(Input::hasFile('url')){
-    //   $file = Input::file('url');
-    //   $destinationPath = public_path().'/images/';
-    //   $filename = time().'_'.$file->getClientOriginalName();
-    //   $filename = str_replace('','_'.$filename);
-    //   $uploadSuccess = $file->move($destinationPath,$filename);
-    // }
-    // $image->url = $filename;
-
-    $image->url = "";
+    $file = $request->file('url');
+    $extension = $file->getClientOriginalExtension();
+    $filename = $file->getClientOriginalName();
+    $filedestiny = 'images/upload/';
+    $file->move($filedestiny, $filename);
+    $image->url = "/".$filedestiny.$filename;
     $result2 = $image->save();
+    $images = Image::all();
     if($result1 && $result2){
       $website = Website::find($websiteID);
-      $page = Page::find($pageID);
-      $elements = Element::all()->where('page_id',$pageID);
-      return view('pages.show')
-        ->with('website',$website)
-        ->with('page',$page)
-        ->with('elements',$elements);
+      $pages = Page::all()->where('website_id',$websiteID);
+      return redirect()->action('WebsitesController@show',
+        ['website' => $website, 'pages' => $pages]
+      );
     }
   }
 
   public function show($id){
-    $image = Image::find($id);
-    return view('images.show')
-      ->with('image',$image);
+    ;
   }
 
   public function edit($id){
     ;
   }
 
-  public function update(Request $request){
-    ;
+  public function update(Request $request, $websiteID, $pageID, $elementID){
+    $image = Image::find($elementID);
+    $image->name = $request->name;
+    $file = $request->file('url');
+    $extension = $file->getClientOriginalExtension();
+    $filename = $file->getClientOriginalName();
+    $filedestiny = 'images/upload/';
+    $file->move($filedestiny, $filename);
+    $image->url = "/".$filedestiny.$filename;
+    $result1 = $image->save();
+    if($result1){
+      $website = Website::find($websiteID);
+      $pages = Page::all()->where('website_id',$websiteID);
+      return redirect()->action('WebsitesController@show',
+        ['website' => $website, 'pages' => $pages]
+      );
+    }
   }
 
   public function destroy($id){
     ;
   }
+
 
 }

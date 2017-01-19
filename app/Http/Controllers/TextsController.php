@@ -35,12 +35,10 @@ class TextsController extends Controller
     $result2 = $text->save();
     if($result1 && $result2){
       $website = Website::find($websiteID);
-      $page = Page::find($pageID);
-      $elements = Element::all()->where('page_id',$pageID);
-      return view('pages.show')
-        ->with('website',$website)
-        ->with('page',$page)
-        ->with('elements',$elements);
+      $pages = Page::all()->where('website_id',$websiteID);
+      return redirect()->action('WebsitesController@show',
+        ['website' => $website, 'pages' => $pages]
+      );
     }
   }
 
@@ -52,8 +50,18 @@ class TextsController extends Controller
     ;
   }
 
-  public function update(Request $request){
-    ;
+  public function update(Request $request, $websiteID, $pageID, $elementID){
+    $text = Text::find($elementID);
+    $text->title = $request->title;
+    $text->content = $request->content;
+    $result1 = $text->save();
+    if($result1){
+      $website = Website::find($websiteID);
+      $pages = Page::all()->where('website_id',$websiteID);
+      return redirect()->action('WebsitesController@show',
+        ['website' => $website, 'pages' => $pages]
+      );
+    }
   }
 
   public function destroy($id){
