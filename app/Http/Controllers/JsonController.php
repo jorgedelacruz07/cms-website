@@ -13,11 +13,44 @@ class JsonController extends Controller
 {
 
   public function website_json($websiteID){
-    return Website::with('page')->find($websiteID);
+    $elements = Website::with('page')->find($websiteID);
+
+    return $elements;
   }
 
   public function page_json($pageID){
-    return Page::with('element')->find($pageID);
+    $elements = Page::with('element')->find($pageID);
+    // $elements = Element::with('text','image')->find($page->id);
+    // return $elements;
+
+    // $page = Page::find($pageID);
+    // $elements = $page->join('elements','pages.id','=','elements.page_id')
+    //                 ->join('texts','elements.id','=','texts.element_id')
+    //                 ->join('images','elements.id','=','images.element_id')
+    //                 ->where('pages.id','=',$pageID)
+    //                 ->select('elements.title','elements.type','texts.title','texts.content','images.name','images.url')
+    //                 ->get();
+
+    // $elements = Page::with('element')
+    //               ->join('elements','pages.id','=','elements.page_id')
+    //               ->join('texts','elements.id','=','texts.element_id')
+    //               ->join('images','elements.id','=','images.element_id')
+    //               ->where('pages.id','=',$pageID)
+    //               ->select('elements.title','elements.type','texts.title','texts.content','images.name','images.url')
+    //               ->get();
+    
+    return $elements;
+  }
+
+  public function element_json($elementID){
+    $element = Element::where('id',$elementID)->first();
+    if($element->type == "text"){
+      $text = $element->text;
+      return $text;
+    }elseif ($element->type == "image") {
+      $image = $element->image;
+      return $image;
+    }
   }
 
   public function page_url(){

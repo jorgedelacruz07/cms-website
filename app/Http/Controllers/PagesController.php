@@ -18,12 +18,15 @@ class PagesController extends Controller
 
   public function store(Request $request, $websiteID){
     $page = new Page;
+    $root = "/json/page";
     $page->website_id = $websiteID;
     $page->name = $request->name;
     $page->url = $request->url;
-    $page->json = $request->json;
-    $result = $page->save();
-    if($result){
+    $page->json = "";
+    $result1 = $page->save();
+    $page->json = $root."/".$page->id;
+    $result2 = $page->save();
+    if($result1 && $result2){
       $website = Website::find($websiteID);
       $pages = Page::all()->where('website_id',$websiteID);
       return redirect()->action('WebsitesController@show',
@@ -40,8 +43,18 @@ class PagesController extends Controller
     ;
   }
 
-  public function update(Request $request, $websiteID){
-    ;
+  public function update(Request $request, $websiteID, $pageID){
+    $page = Page::find($pageID);
+    $page->name = $request->name;
+    $page->url = $request->url;
+    $result = $page->save();
+    if($result){
+      $website = Website::find($websiteID);
+      $pages = Page::all()->where('website_id',$websiteID);
+      return redirect()->action('WebsitesController@show',
+        ['website' => $website, 'pages' => $pages]
+      );
+    }
   }
 
   public function destroy($websiteID){

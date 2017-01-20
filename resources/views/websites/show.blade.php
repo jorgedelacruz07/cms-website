@@ -2,12 +2,13 @@
 
 @section('content')
 
-<a class="uk-h2 uk-button uk-button-primary" href="#createPage" data-uk-modal="">CREAR PÁGINA</a>
+<a class="uk-h2 uk-button uk-button-primary" href="#createModalPage" data-uk-modal="">CREAR PÁGINA</a>
+
 <br><br>
 @include('pages.index')
 
 <div class="uk-margin-top">
-  <div id="createPage" class="uk-modal">
+  <div id="createModalPage" class="uk-modal">
     <div class="uk-modal-dialog">
       <a href="" class="uk-modal-close uk-close"></a>
       <p>
@@ -20,9 +21,6 @@
             </div>
             <div class="uk-form-row">
               <input name="url" type="url" class="uk-width-1-1 uk-form-large" placeholder="URL" required="">
-            </div>
-            <div class="uk-form-row">
-              <input name="json" type="url" class="uk-width-1-1 uk-form-large" placeholder="JSON" required="">
             </div>
             <div class="uk-form-row uk-text-center">
               <button class="uk-button uk-button-primary">ENVIAR</button>
@@ -38,5 +36,7 @@
     </div>
   </div>
 </div>
+
+
 
 @stop

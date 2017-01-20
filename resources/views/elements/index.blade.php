@@ -1,5 +1,40 @@
-<a class="uk-button uk-button-primary" href="#createModalText<?= $page->id ?>" data-uk-modal="">CREAR TEXTO</a>
-<a class="uk-button uk-button-primary" href="#createModalImage<?= $page->id ?>" data-uk-modal="">CREAR IMAGEN</a>
+<div class="uk-margin-large-top">
+  <a class="uk-h2 uk-button uk-button-primary" href="#editModalPage<?= $page->id ?>" data-uk-modal="">EDITAR PÁGINA</a>
+  <a class="uk-h2 uk-button uk-button-primary" href="<?= $page->json ?>" target="_blank">JSON</a>
+</div>
+
+<div id="editModalPage<?= $page->id ?>" class="uk-modal">
+  <div class="uk-modal-dialog">
+    <a href="" class="uk-modal-close uk-close"></a>
+    <p>
+      <div class="uk-container uk-container-center">
+        <h3 class="uk-text-center">EDITAR PÁGINA</h3>
+        {!! Form::open(['action' => ['PagesController@update', $website->id, $page->id], 'method' => 'post', 'id' => 'form-contacto', 'class' => 'uk-form uk-position-relative uk-margin-large-top']) !!}
+          {!! Form::token(); !!}
+          <div class="uk-form-row">
+            <input name="name" type="text" class="uk-width-1-1 uk-form-large" placeholder="Nombre" value="<?= $page->name ?>" required="">
+          </div>
+          <div class="uk-form-row">
+            <input name="url" type="url" class="uk-width-1-1 uk-form-large" placeholder="URL" value="<?= $page->url ?>" required="">
+          </div>
+          <div class="uk-form-row uk-text-center">
+            <button class="uk-button uk-button-primary">ENVIAR</button>
+          </div>
+          <div class="form-loader uk-hidden bg-white-transparent uk-position-cover uk-flex uk-flex-center uk-flex-middle">
+            <div class="uk-text-muted uk-text-center uk-heading-large">
+              <i class="uk-icon-spinner uk-icon-spin"></i>
+            </div>
+          </div>
+        {!! Form::close() !!}
+      </div>
+    </p>
+  </div>
+</div>
+
+<div class="uk-margin-large-top">
+  <a class="uk-button uk-button-primary" href="#createModalText<?= $page->id ?>" data-uk-modal="">CREAR TEXTO</a>
+  <a class="uk-button uk-button-primary" href="#createModalImage<?= $page->id ?>" data-uk-modal="">CREAR IMAGEN</a>
+</div>
 
 <div class="uk-margin-large-top">
   <table class="uk-table uk-table-hover uk-table-striped uk-table-condensed">

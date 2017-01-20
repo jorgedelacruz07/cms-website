@@ -25,6 +25,7 @@ Route::get('/website/{websiteID}', ['uses' => 'WebsitesController@show']);
 // Page
 Route::get('/website/{websiteID}/page', 'PagesController@index')->middleware('auth');
 Route::post('/website/{websiteID}/page/', 'PagesController@store');
+Route::post('/website/{websiteID}/page/{pageID}/update', 'PagesController@update');
 
 // Text
 Route::post('/{websiteID}/{pageID}/text/create', 'TextsController@store');
@@ -39,6 +40,7 @@ Route::post('/{websiteID}/{pageID}//image/{elementID}/update', 'ImagesController
 Route::group(['prefix' => 'json'], function () {
   Route::get('/website/{websiteID}', 'JsonController@website_json');
   Route::get('/page/{pageID}', 'JsonController@page_json');
+  Route::get('/element/{elementID}', 'JsonController@element_json');
 });
 
 Route::get('/get_json', 'JsonController@page_url');
